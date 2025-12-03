@@ -50,15 +50,20 @@ To support qualitative assessment, we implemented a custom visualization module 
 After extensive exploration of U-Net variants, DeepLabV3+, EfficientNet-based FPNs, YOLOv8-seg, and multi-model ensembles, YOLOv11-seg emerged as the final model. It directly addressed the recurring failure modes documented earlier, offering improved cluster separation, superior sensitivity to small objects, refined boundary quality, and greater robustness to urban noise. This empirical performance was also consistent with the findings from recent high-resolution forestry literature, including the VHRTrees benchmark, which identified YOLO architectures as state-of-the-art for tree detection in VHR imagery, and the Ahmedabad case study, which demonstrated YOLO’s effectiveness in complex urban canopy environments.
 
 ## Results
+
 The following table shows the metrics of our YOLOv11 Model:
+
 <img width="546" height="269" alt="Screenshot 2025-12-03 at 11 33 11 PM" src="https://github.com/user-attachments/assets/81f8e538-dd8f-4458-97ce-69bf818f3d2f" />
 
 The following table shows the details of all the other models explored by us:
+
 <img width="377" height="288" alt="Screenshot 2025-12-03 at 11 48 57 PM" src="https://github.com/user-attachments/assets/690ced02-60fb-4b6d-9722-f3b5a033f11f" />
 
 
 ## Limitations and Conclusion 
+
 Although YOLOv11 achieved the highest performance among all architectures tested, several limitations remained across data quality, model behavior, and computational constraints. The competition dataset contained imagery with resolutions varying from 10 cm to 80 cm, causing inconsistent feature granularity especially for small crowns that often spanned only a few effective pixels in lower-resolution tiles. This variability, combined with shadows, rooftops, and dense canopy clusters, led to systematically lower recall, reflecting the model’s conservative predictions and occasional under-segmentation in complex urban scenes. Training was further constrained by GPU memory limits, restricting batch size and reducing the breadth of possible augmentation and hyperparameter tuning. Additionally, polygon-level conversion into YOLO’s mask format introduced geometric quantization that may have contributed to modest mAP75 scores, especially in cases requiring highly precise boundary delineation.
+
 Despite these limitations, the study demonstrates that YOLOv11-Seg is a strong and reliable architecture for real-time individual tree crown detection, significantly outperforming classical semantic-segmentation baselines such as U-Net, DeepLabV3+, FPN variants, and multi-model ensembles. With a final competition score of 0.25859 and a ranking of 58 out of 500 teams, the model showed robust generalization across diverse geographic contexts and strong separation of adjacent crowns, aligning with recent findings in high-resolution forestry research. The iterative experimentation, careful preprocessing workflow, and consistent improvements over baseline models highlight YOLOv11’s suitability for large-scale operational canopy mapping. Future advancements such as improved resolution datasets, transformer-enhanced decoders, or boundary refinement modules may further elevate performance, but the current results affirm YOLOv11 as an effective and practical solution for modern tree canopy segmentation tasks.
 
 ## References 
