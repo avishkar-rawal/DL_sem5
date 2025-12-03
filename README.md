@@ -1,9 +1,9 @@
 # YOLOv11-Based Segmentation for Tree Canopy Mapping
-1. Introduction
+## 1. Introduction
 
 Tree canopy segmentation refers to the automated identification and delineation of individual or clustered tree crowns from high-resolution aerial or satellite imagery. Although widely applied across environmental and geospatial domains, existing segmentation methods often struggle to generalize across regions, imaging conditions, and mixed urban–rural landscapes. Variations in lighting, canopy density, background textures, and structural noise make consistent model performance challenging, emphasizing the need for more robust and adaptable approaches. To encourage progress in this area, Solafune introduced a dedicated tree-canopy-detection competition that brings together diverse aerial and satellite imagery and provides a rigorous benchmark for evaluating modern segmentation models. As part of this challenge, we reviewed a range of classical and contemporary architectures and ultimately selected YOLOv11, the current state of the art in real-time segmentation, for its strong performance and generalization capabilities.
 
-2. Dataset description
+## 2. Dataset description
 
 The competition dataset is constructed from a curated collection of imagery sourced from SWISSIMAGE, NIAP, and national New Zealand aerial datasets. It includes high-resolution RGB TIFF images spanning both rural and urban environments, with spatial resolutions ranging from 10 cm to 80 cm. Polygon-annotated tree canopy masks are provided for the training split, accompanied by 150 evaluation images used for model validation. The dataset reflects real-world complexity, containing varied canopy structures, shadows, rooftops, mixed vegetation, roads, and other forms of environmental noise, making it a representative foundation for developing tree canopy segmentation models.
 
@@ -11,7 +11,7 @@ The polygon-based canopy annotations provided in the dataset use standard evalua
 
 <img width="1612" height="544" alt="image" src="https://github.com/user-attachments/assets/4ab2e385-417e-43a0-ae72-44a575d9e914" />
 
-3. Solutions Proposed by Others
+## 3. Solutions Proposed by Others
    
 Research in Individual Tree Crown Detection (ITCD) has evolved substantially over the past decade, moving from traditional image-processing techniques toward deep learning–based architectures capable of modeling complex canopy structures. A comprehensive review of the field shows that, beginning around 2017, deep learning (DL) rapidly became the dominant methodological choice.  Within semantic segmentation, several architectures—such as U-Net, DeepLabV3+, SegNet, and FCN have been widely adopted for wall-to-wall canopy delineation. Among these, U-Net consistently emerges as a strong baseline, achieving F1-scores between 94.00% and 94.31% in comparative studies and performing competitively with contemporary models like DeepLabV3+. Its encoder–decoder structure effectively captures broad spatial context and canopy shape, enabling accurate mapping of continuous vegetative cover. However, a well-documented limitation is its tendency to merge overlapping crowns into single segmentation masks. Because it performs pixel-wise classification without explicit instance separation, performance decreases in dense urban environments where tree crowns are tightly clustered and structurally complex.
 
@@ -22,7 +22,7 @@ Parallel to these developments, YOLO-based instance segmentation models have bee
 
 Recent reviews emphasize that no single architecture robustly handles all canopy scenarios. As a result, ensemble strategies have been proposed often combining U-Net, Feature Pyramid Networks (FPN), and DeepLab variants to blend multi-scale features. These hybrid models improve stability in areas with complex textures, overlapping branches, or heterogeneous backgrounds. Collectively, the literature points toward growing interest in architectures that unify the speed of one-shot detection with the accuracy of fine-grained segmentation. This motivates exploration of models such as Unet, Ensemble strategies and YOLOv11, which are designed to provide stronger generalization, real-time performance, and higher-quality instance-level crown delineation.
 
-4. Proposed Models and their Implementation
+## 4. Proposed Models and their Implementation
    
 Our initial exploration of the literature strongly indicated that YOLO-based architectures tend to outperform classical semantic-segmentation models. However, in order to establish a clear baseline for comparison, we first implemented a U-Net segmentation model using EfficientNet-B3 as the encoder backbone, pre-trained on ImageNet. This baseline gave a mAP score of 0.1047, hence providing a meaningful reference point against which to evaluate the successive improvements obtained through the YOLOv11 segmentation pipeline.
 
