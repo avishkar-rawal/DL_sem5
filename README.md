@@ -7,4 +7,4 @@ Tree canopy segmentation refers to the automated identification and delineation 
 
 The competition dataset is constructed from a curated collection of imagery sourced from SWISSIMAGE, NIAP, and national New Zealand aerial datasets. It includes high-resolution RGB TIFF images spanning both rural and urban environments, with spatial resolutions ranging from 10 cm to 80 cm. Polygon-annotated tree canopy masks are provided for the training split, accompanied by 150 evaluation images used for model validation. The dataset reflects real-world complexity, containing varied canopy structures, shadows, rooftops, mixed vegetation, roads, and other forms of environmental noise, making it a representative foundation for developing tree canopy segmentation models.
 
-The polygon-based canopy annotations provided in the dataset use standard evaluation metric mean Average Precision (mAP) score.
+The polygon-based canopy annotations provided in the dataset use standard evaluation metric mean Average Precision (mAP-75) score.
