@@ -76,3 +76,8 @@ Singla, J. G., Jaiswal, G., Space Applications Centre (ISRO), & HMR institute of
 Zheng, J., Yuan, S., Li, W., Fu, H., Yu, L., School of Artificial Intelligence, Ministry of Education Key Laboratory for Earth System Modeling, School of Geospatial Engineering and Science, National Supercomputing Center in Wuxi, Tsinghua University, & Tsinghua University (Department of Earth System Science)- Xi’an Institute of Surveying and Mapping Joint Research Center for Next-Generation Smart Mapping. (2023). A review of individual tree crown detection and delineation from optical remote sensing images. arXiv.
 
 
+## VIDEO SUBMISSION
+https://youtu.be/Iem80sYmcCc
+
+
+
