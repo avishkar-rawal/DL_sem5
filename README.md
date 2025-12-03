@@ -9,3 +9,4 @@ The competition dataset is constructed from a curated collection of imagery sour
 
 The polygon-based canopy annotations provided in the dataset use standard evaluation metric mean Average Precision (mAP-75) score.
 
+<img width="1612" height="544" alt="image" src="https://github.com/user-attachments/assets/4ab2e385-417e-43a0-ae72-44a575d9e914" />
