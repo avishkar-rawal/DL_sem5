@@ -7,6 +7,7 @@ Tree canopy segmentation refers to the automated identification and delineation 
 
 The competition dataset is constructed from a curated collection of imagery sourced from SWISSIMAGE, NIAP, and national New Zealand aerial datasets. It includes high-resolution RGB TIFF images spanning both rural and urban environments, with spatial resolutions ranging from 10 cm to 80 cm. Polygon-annotated tree canopy masks are provided for the training split, accompanied by 150 evaluation images used for model validation. The dataset reflects real-world complexity, containing varied canopy structures, shadows, rooftops, mixed vegetation, roads, and other forms of environmental noise, making it a representative foundation for developing tree canopy segmentation models.
 
+
 The polygon-based canopy annotations provided in the dataset use standard evaluation metric mean Average Precision (mAP-75) score.
 
 <img width="1612" height="544" alt="image" src="https://github.com/user-attachments/assets/4ab2e385-417e-43a0-ae72-44a575d9e914" />
@@ -41,7 +42,7 @@ Our methodology was built on training and evaluating multiple deep learning arch
 
 We began with the cleaned dataset produced from our preprocessing stage and proceeded through YOLO-based training. The training process employed YOLOv11s-seg as the primary architecture, using 640×640 images, AdamW optimization, and GPU-dependent batch sizes. Augmentation strategies like including flips, rotations, and multi-scale resizing were applied. YOLOv11’s improved mask head and decoupled detection–segmentation architecture contributed significantly to stable training and precise boundary reconstruction.
 
-<img width="601" height="355" alt="Screenshot 2025-12-03 at 11 27 12 PM" src="https://github.com/user-attachments/assets/e9eb9169-6723-469e-802f-db27a3f0e209" />
+<img width="702" height="368" alt="Screenshot 2025-12-03 at 11 44 48 PM" src="https://github.com/user-attachments/assets/449e8d76-13b5-4282-a406-9757845b96ec" />
 
 Model evaluation focused on mask mAP50 and mAP5095, providing a structured view of both coarse and fine-grained segmentation performance. Across all methods tested, YOLOv11 demonstrated the strongest ability to separate adjacent canopies, detect small trees, and maintain stability across epochs. While some limitations persisted, particularly regarding extremely small crowns, the model consistently displayed higher precision than recall, indicating a conservative prediction strategy that avoided excessive over-segmentation. This behavior aligned with our design preference for minimizing false positives in dense urban environments.
 To support qualitative assessment, we implemented a custom visualization module that rendered predicted polygons overlaid on input imagery with confidence-weighted opacity. These tools proved essential for debugging boundary errors, understanding model uncertainty, and refining hyperparameters based on visual inspection rather than metrics alone.
