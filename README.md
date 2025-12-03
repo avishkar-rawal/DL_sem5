@@ -52,4 +52,17 @@ After extensive exploration of U-Net variants, DeepLabV3+, EfficientNet-based FP
 ## Results
 <img width="546" height="269" alt="Screenshot 2025-12-03 at 11 33 11 PM" src="https://github.com/user-attachments/assets/81f8e538-dd8f-4458-97ce-69bf818f3d2f" />
 
+## Limitations
+The tree canopy segmentation task presented challenges that extended beyond initial expectations. The dataset proved more difficult than it appeared, with trees varying massively across tiles in color, density, lighting, and shadows. The annotated polygons contained complexity, and small mistakes were amplified during segmentation. In very high-resolution imagery, individual trees are tiny, making even one to two pixel errors significant.
+The failure modes observed during experimentation were structural rather than random. False positives occurred when roofs, shadows, and asphalt exhibited similar textures to tree canopies. False negatives appeared with tiny trees, thin crowns, and partially occluded trees. Dense clusters consistently tricked almost all segmentation models tested.
+Training behavior revealed that more epochs did not guarantee better models. EfficientNet plateaued during training, while U-Net and DeepLab architectures overfit quickly. YOLO models benefitted from their architecture rather than extended training duration.
+The mAP50-95 evaluation metric proved brutal for ecological segmentation. Small intersection-over-union differences punished thin-tree boundaries heavily. Even with lower metrics, YOLOv11 produced the most usable crowns qualitatively. Clean boundaries mattered more than raw numerical scores.
+The precision versus recall trade-off remained unavoidable. YOLOv11 exhibited traditional behavior with high precision, leading to fewer false positives. This characteristic proved good for ecological mapping where overestimation is worse than underestimation.
+
+## Conclusion
+This work investigated tree canopy segmentation using YOLOv11 within the Solafune competition framework. Through systematic experimentation, we established that architecture matters more than hyperparameters, and detection-first models outperform segmentation-first models for this task.
+Our methodology began with a U-Net baseline using EfficientNet-B3, achieving an mAP of 0.1047. Progressive experimentation with various architectures led to YOLOv11-seg as the final model. The model achieved an mAP50-95 of approximately 0.0665 and secured rank 58 among nearly 500 participants.
+The leaderboard score did not fully reflect inner performance. Qualitative results often mattered more than metrics, with YOLOv11 producing the most usable crowns despite numerical limitations.
+Several directions would improve future work. We would collect more diverse training data, including more shadows, more tiny trees, and more dense urban areas to reduce error modes. Instance segmentation combined with transformer backbones such as Mask2Former or SegFormer would address boundary quality. Using tiling with overlap for tiny tree recall would increase detection granularity through smaller effective tiles. Separate pipelines for individual trees versus clusters would address the different difficulty levels these tasks represent.
+In conclusion, YOLOv11 provides a robust foundation for tree canopy segmentation in heterogeneous aerial imagery, with its architectural advantages outweighing the limitations encountered during this competition.
 
