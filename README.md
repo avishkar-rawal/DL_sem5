@@ -26,6 +26,10 @@ Recent reviews emphasize that no single architecture robustly handles all canopy
    
 Our initial exploration of the literature strongly indicated that YOLO-based architectures tend to outperform classical semantic-segmentation models. However, in order to establish a clear baseline for comparison, we first implemented a U-Net segmentation model using EfficientNet-B3 as the encoder backbone, pre-trained on ImageNet. This baseline gave a mAP score of 0.1047, hence providing a meaningful reference point against which to evaluate the successive improvements obtained through the YOLOv11 segmentation pipeline.
 
+### Score of Our Baseline Model (U-Net)
+
+<img width="614" height="71" alt="Screenshot 2025-12-03 at 11 26 05 PM" src="https://github.com/user-attachments/assets/150393f5-2aca-477c-b7d4-692ba5d80c63" />
+
 4.1 Preprocessing 
 
 Before training the final model, we designed a complete preprocessing workflow to handle the raw competition dataset (GeoTIFFs + polygon annotations).
@@ -36,6 +40,8 @@ Annotation preprocessing was a major component of this phase. The competition-su
 Our methodology was built on training and evaluating multiple deep learning architectures before selecting the final model. Rather than adopting a single model from the outset, we pursued an iterative experimentation strategy that spanned classical segmentation networks, hybrid detection–segmentation systems, and modern object detectors. 
 
 We began with the cleaned dataset produced from our preprocessing stage and proceeded through YOLO-based training. The training process employed YOLOv11s-seg as the primary architecture, using 640×640 images, AdamW optimization, and GPU-dependent batch sizes. Augmentation strategies like including flips, rotations, and multi-scale resizing were applied. YOLOv11’s improved mask head and decoupled detection–segmentation architecture contributed significantly to stable training and precise boundary reconstruction.
+
+<img width="601" height="355" alt="Screenshot 2025-12-03 at 11 27 12 PM" src="https://github.com/user-attachments/assets/e9eb9169-6723-469e-802f-db27a3f0e209" />
 
 Model evaluation focused on mask mAP50 and mAP5095, providing a structured view of both coarse and fine-grained segmentation performance. Across all methods tested, YOLOv11 demonstrated the strongest ability to separate adjacent canopies, detect small trees, and maintain stability across epochs. While some limitations persisted, particularly regarding extremely small crowns, the model consistently displayed higher precision than recall, indicating a conservative prediction strategy that avoided excessive over-segmentation. This behavior aligned with our design preference for minimizing false positives in dense urban environments.
 To support qualitative assessment, we implemented a custom visualization module that rendered predicted polygons overlaid on input imagery with confidence-weighted opacity. These tools proved essential for debugging boundary errors, understanding model uncertainty, and refining hyperparameters based on visual inspection rather than metrics alone.
