@@ -26,16 +26,16 @@ Recent reviews emphasize that no single architecture robustly handles all canopy
    
 Our initial exploration of the literature strongly indicated that YOLO-based architectures tend to outperform classical semantic-segmentation models. However, in order to establish a clear baseline for comparison, we first implemented a U-Net segmentation model using EfficientNet-B3 as the encoder backbone, pre-trained on ImageNet. This baseline gave a mAP score of 0.1047, hence providing a meaningful reference point against which to evaluate the successive improvements obtained through the YOLOv11 segmentation pipeline.
 
-### Score of Our Baseline Model (U-Net)
+##### Score of Our Baseline Model (U-Net)
 
 <img width="614" height="71" alt="Screenshot 2025-12-03 at 11 26 05 PM" src="https://github.com/user-attachments/assets/150393f5-2aca-477c-b7d4-692ba5d80c63" />
 
-4.1 Preprocessing 
+### 4.1 Preprocessing 
 
 Before training the final model, we designed a complete preprocessing workflow to handle the raw competition dataset (GeoTIFFs + polygon annotations).
 Annotation preprocessing was a major component of this phase. The competition-supplied Solafune JSON files were parsed, validated, and converted into the COCO instance-segmentation format. During this transformation, every polygon was examined for structural integrity (e.g., non-self-intersecting geometry, correct vertex order, and adherence to image boundaries). Subsequently, the COCO annotations were programmatically converted into YOLO segmentation labels with normalized polygon coordinates. Finally, an 80/20 train–validation split was created, ensuring that both splits contained a representative mix of individual crowns, dense clusters, and complex urban scenes. 
 
-4.2 Methodology 
+### 4.2 Methodology 
 
 Our methodology was built on training and evaluating multiple deep learning architectures before selecting the final model. Rather than adopting a single model from the outset, we pursued an iterative experimentation strategy that spanned classical segmentation networks, hybrid detection–segmentation systems, and modern object detectors. 
 
@@ -47,4 +47,7 @@ Model evaluation focused on mask mAP50 and mAP5095, providing a structured view 
 To support qualitative assessment, we implemented a custom visualization module that rendered predicted polygons overlaid on input imagery with confidence-weighted opacity. These tools proved essential for debugging boundary errors, understanding model uncertainty, and refining hyperparameters based on visual inspection rather than metrics alone.
 
 After extensive exploration of U-Net variants, DeepLabV3+, EfficientNet-based FPNs, YOLOv8-seg, and multi-model ensembles, YOLOv11-seg emerged as the final model. It directly addressed the recurring failure modes documented earlier, offering improved cluster separation, superior sensitivity to small objects, refined boundary quality, and greater robustness to urban noise. This empirical performance was also consistent with the findings from recent high-resolution forestry literature, including the VHRTrees benchmark, which identified YOLO architectures as state-of-the-art for tree detection in VHR imagery, and the Ahmedabad case study, which demonstrated YOLO’s effectiveness in complex urban canopy environments.
+
+## Results
+
 
