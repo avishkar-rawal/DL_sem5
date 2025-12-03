@@ -49,5 +49,6 @@ To support qualitative assessment, we implemented a custom visualization module 
 After extensive exploration of U-Net variants, DeepLabV3+, EfficientNet-based FPNs, YOLOv8-seg, and multi-model ensembles, YOLOv11-seg emerged as the final model. It directly addressed the recurring failure modes documented earlier, offering improved cluster separation, superior sensitivity to small objects, refined boundary quality, and greater robustness to urban noise. This empirical performance was also consistent with the findings from recent high-resolution forestry literature, including the VHRTrees benchmark, which identified YOLO architectures as state-of-the-art for tree detection in VHR imagery, and the Ahmedabad case study, which demonstrated YOLO’s effectiveness in complex urban canopy environments.
 
 ## Results
+<img width="546" height="269" alt="Screenshot 2025-12-03 at 11 33 11 PM" src="https://github.com/user-attachments/assets/81f8e538-dd8f-4458-97ce-69bf818f3d2f" />
 
 
